@@ -1,15 +1,15 @@
 function computerPlay(){
     const randomValue = Math.random();
-    let computerSelection;
+    let computerSelect;
     if(randomValue <= 0.33){
         computerSelecction = "Rock";
-        return computerSelection;
+        return computerSelect;
     }else if(randomValue > 0.66){
         computerSelecction = "Scissors";
-        return computerSelection;
+        return computerSelect;
     }else{
         computerSelecction = "Paper";
-        return computerSelection;
+        return computerSelect;
     }
 }
 
@@ -23,13 +23,13 @@ function round(playerSelection, computerSelection){
         return "You lose! Rock beats scissors";
     }else if(computerSelection == "Rock" && playerSelection == "paper"){
         return "You won! Paper beats Rock";
-    }else if(computerSelection == "Paper" && playerSelection == "Rock"){
+    }else if(computerSelection == "Paper" && playerSelection == "rock"){
         return "You lose! Paper beats Rock";
     }else if(computerSelection == "Paper" && playerSelection == "scissors"){
         return "You won! Scissors beats Paper";
-    }else if(computerSelection == "Scissors" && playerSelection == "Paper"){
+    }else if(computerSelection == "Scissors" && playerSelection == "paper"){
         return "You lose! Scissors beats Paper";
-    }else if(computerSelection == "Scissors" && playerSelection == "Rock"){
+    }else if(computerSelection == "Scissors" && playerSelection == "rock"){
         return "You won! Rock beats Scissors";
     }
 }
