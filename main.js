@@ -12,3 +12,14 @@ function computerPlay(){
         return computerSelecction;
     }
 }
+
+function round(playerSelection, computerSelection){
+    playerSelection = prompt("What is your move?");
+    computerSelection = computerPlay();
+
+    if(computerSelection == playerSelection){
+        return "Tie";
+    }else if(computerSelection == "Rock" && playerSelection == "scissors"){
+        return "You lose! Rock beats scissors";
+    }
+}
