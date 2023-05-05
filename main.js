@@ -2,13 +2,13 @@ function computerPlay(){
     const randomValue = Math.random();
     let computerSelect;
     if(randomValue <= 0.33){
-        computerSelecction = "Rock";
+        computerSelect = "Rock";
         return computerSelect;
     }else if(randomValue > 0.66){
-        computerSelecction = "Scissors";
+        computerSelect = "Scissors";
         return computerSelect;
     }else{
-        computerSelecction = "Paper";
+        computerSelect = "Paper";
         return computerSelect;
     }
 }
