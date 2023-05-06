@@ -1,79 +1,113 @@
+console.log("Wellcome to the game Rock, Paper, Scissors\nTo start you have to type the function game()\nThen you will have to compete against the computer typing your move wether it's rock, paper or scissors");
+/* PLAYERS MOVEMENTS */
+
+let options = ["rock", "paper", "scissors"]
+
 function computerPlay(){
     const randomValue = Math.random();
-    let computerSelect;
+    let computerMove;
     if(randomValue <= 0.33){
-        computerSelect = "rock";
-
-        // console.log(computerSelect);
-
-        return computerSelect;
+        computerMove = options[0];
     }else if(randomValue > 0.66){
-        computerSelect = "scissors";
-
-        // console.log(computerSelect);
-        
-        return computerSelect;
+        computerMove = options[1];
     }else{
-        computerSelect = "paper";
-
-        // console.log(computerSelect);
-        
-        return computerSelect;
+        computerMove = options[2];
     }
+    return computerMove;
 }
 
-let userScore = 0
-let computerScore = 0
+function playerPlay(){
 
-const playRound = function round(playerSelection, computerSelection){
-    promptVar = prompt("Would you like to choose Rock, Paper or Scissors?");
-    playerSelection = promptVar.toLowerCase();
+    let playerMove = false;
+    let inputValue;
 
-    computerSelection = computerPlay();
+    while(playerMove == false){
+        
+        inputValue = prompt("Please choose your move: rock, paper or scissors");
 
-    if(computerSelection == playerSelection){
-        console.log("It's a Tie");
-        console.log(`Your score is ${userScore} and the computer's score is ${computerScore}`)
-    }else if(computerSelection == "rock" && playerSelection == "scissors"){
+//Use try-catch to handle invalid inputs and prevent a crash
+
+        try {
+            playerMove = inputValue.trim().toLowerCase();
+        } catch (error) {
+            alert("Invalid input. Please choose rock, paper or scissors.");
+        }
+
+//conditional to check if the input is empty
+
+        if(playerMove.length === 0){
+            playerMove = false;
+            alert("Invalid input. Please write rock or paper or scissors.");
+        }else if(!options.includes(playerMove)){
+            playerMove = false;
+            alert("Invalid input. Please choose rock, paper or scissors.");
+        }
+
+    }
+
+    return playerMove;
+
+}
+
+/* MOVEMENTS COMPARISON */
+
+let playerScore = 0;
+let computerScore = 0;
+
+function playRound(){
+
+    let computerMove = computerPlay();
+    let playerMove = playerPlay();
+
+    if(computerMove == playerMove){
+        console.log("It's a Tie " + computerMove + " vs " + playerMove);
+        console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
+    }else if(computerMove == "rock" && playerMove == "scissors"){
         computerScore += 1;
         console.log("You lose! Rock beats scissors");
-        console.log(`Your score is ${userScore} and the computer's score is ${computerScore}`)
-    }else if(computerSelection == "rock" && playerSelection == "paper"){
-        userScore += 1;
-        return "You won! Paper beats Rock";
-        console.log(`Your score is ${userScore} and the computer's score is ${computerScore}`)
-    }else if(computerSelection == "paper" && playerSelection == "rock"){
+        console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
+    }else if(computerMove == "rock" && playerMove == "paper"){
+        playerScore += 1;
+        console.log("You won! Paper beats Rock");
+        console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
+    }else if(computerMove == "paper" && playerMove == "rock"){
         computerScore += 1;
         console.log("You lose! Paper beats Rock");
-        console.log(`Your score is ${userScore} and the computer's score is ${computerScore}`)
-    }else if(computerSelection == "paper" && playerSelection == "scissors"){
-        userScore += 1;
+        console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
+    }else if(computerMove == "paper" && playerMove == "scissors"){
+        playerScore += 1;
         console.log("You won! Scissors beats Paper");
-        console.log(`Your score is ${userScore} and the computer's score is ${computerScore}`)
-    }else if(computerSelection == "scissors" && playerSelection == "paper"){
+        console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
+    }else if(computerMove == "scissors" && playerMove == "paper"){
         computerScore += 1;
         console.log("You lose! Scissors beats Paper");
-        console.log(`Your score is ${userScore} and the computer's score is ${computerScore}`)
-    }else if(computerSelection == "scissors" && playerSelection == "rock"){
-        userScore += 1;
+        console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
+    }else if(computerMove == "scissors" && playerMove == "rock"){
+        playerScore += 1;
         console.log("You won! Rock beats Scissors");
-        console.log(`Your score is ${userScore} and the computer's score is ${computerScore}`)
+        console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
     }
 }
 
+/* ROUNDS AND GAME START*/
 
 function game() {
     for (let i = 0; i < 5; i++) {
-        playRound()
+        console.log("Round #" + (i+1) + "--------");
+        playRound();
+        console.log("__________________")
     }
     function winner() {
-        if(computerScore > userScore){
-            return "You lose, the computer wins";
-        }else if(userScore > computerScore){
-            return "You won, the computer is a looser";
+        if(computerScore > playerScore){
+            return "_-You lose, the computer wins-_";
+        }else if(playerScore > computerScore){
+            return "_-You won, the computer is a looser-_";
         }else{
-            return "Its a tie";
+            return "_-Its a tie-_";
         }
     }
-    return winner()
+
+    console.log(winner());
+    computerScore = 0;
+    playerScore = 0;
 }
